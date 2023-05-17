@@ -537,6 +537,7 @@ function Patch-DellServices(){
 	$Button1.Enabled = $false
 	foreach ($service in $(Get-Service | where {$_.DisplayName -match 'Dell'})){
 		get-service $service.Name | Set-Service -Status stopped -StartupType disabled
+		get-service $service.Name | Stop-Service -Force
 	}
 	$Button1.Text = "Patch"
 	$Button1.Enabled = $true
